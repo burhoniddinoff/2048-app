@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreen">
+
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.a2048app.presenter.ui.splash.SplashScreen"
+        android:label="SplashScreen"
+        tools:layout="@layout/screen_splash">
+        <action
+            android:id="@+id/action_splashScreen_to_homeScreen"
+            app:destination="@id/homeScreen"
+            app:popUpTo="@id/splashScreen"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="com.example.a2048app.presenter.ui.home.HomeScreen"
+        android:label="HomeScreen"
+        tools:layout="@layout/screen_home">
+        <action
+            android:id="@+id/action_homeScreen_to_gameScreen"
+            app:destination="@id/gameScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_infoScreen"
+            app:destination="@id/infoScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/gameScreen"
+        android:name="com.example.a2048app.presenter.ui.game.GameScreen"
+        android:label="screen_game"
+        tools:layout="@layout/screen_game" >
+        <action
+            android:id="@+id/action_gameScreen_to_infoScreen"
+            app:destination="@id/infoScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoScreen"
+        tools:layout="@layout/screen_info"
+        android:name="com.example.a2048app.presenter.ui.info.InfoScreen"
+        android:label="InfoScreen" />
+</navigation>

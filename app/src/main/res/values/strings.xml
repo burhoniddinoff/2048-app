@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">2048app</string>
+    <string name="menu">Menu</string>
+    <string name="keep_going">KEEP GOING</string>
+    <string name="new_game">NEW GAME</string>
+    <string name="how_to_play">HOW TO PLAY</string>
+    <string name="info">Join the numbers and get to the 2048 tile!</string>
+    <string name="swipe">SWIPE TO MOVE ALL TILES</string>
+    <string name="wall">WALL</string>
+    <string name="when">WHE TWO TILES WITH THE SAME \nNUMBER TOUCH, THEY MERGE INTO ONE!</string>
+    <string name="when_2">IT\'S OVER WHEN THE BOARD FILLS UP...</string>
+    <string name="join">JOIN THE NUMBERS AND GET TO \nTHE 2048 TILE!</string>
+    <string name="let_s_play">LET\'S PLAY!</string>
+</resources>

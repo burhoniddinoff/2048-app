@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/name2048"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="#edc501"
+        android:textColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintBottom_toTopOf="@id/mainView"
+        app:layout_constraintEnd_toStartOf="@id/score"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/oswald_medium"
+            android:text="2048"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/score"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:backgroundTint="#bbada0"
+        android:textColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toStartOf="@id/best"
+        app:layout_constraintStart_toEndOf="@id/name2048"
+        app:layout_constraintTop_toTopOf="@id/name2048">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/oswald_medium"
+            android:gravity="center"
+            android:text="SCORE\n2048"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/menu"
+        android:layout_width="100dp"
+        android:layout_height="36sp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ee985b"
+        android:textColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="@id/score"
+        app:layout_constraintStart_toStartOf="@+id/score"
+        app:layout_constraintTop_toBottomOf="@id/score">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/oswald_medium"
+            android:gravity="center"
+            android:text="MENU"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/best"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:backgroundTint="#bbada0"
+        android:textColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/score"
+        app:layout_constraintTop_toTopOf="@id/score">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/oswald_medium"
+            android:gravity="center"
+            android:text="BEST\n2048"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/restart"
+        android:layout_width="100dp"
+        android:layout_height="36sp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#ee985b"
+        android:textColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="@id/best"
+        app:layout_constraintStart_toStartOf="@+id/best"
+        app:layout_constraintTop_toBottomOf="@id/best">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/oswald_medium"
+            android:gravity="center"
+            android:text="RESTART"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/oswald_medium"
+        android:text="@string/info"
+        android:textColor="#cdbfb6"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/mainView"
+        app:layout_constraintStart_toStartOf="@id/mainView"
+        app:layout_constraintTop_toBottomOf="@id/menu" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="#bbada0"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75"
+        tools:layout_editor_absoluteX="20dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/PlayButton"
+                tools:text="0" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

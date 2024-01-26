@@ -1,0 +1,22 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme._2048app" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+         <item name="colorPrimary">@color/bg_color</item>
+    </style>
+
+    <style name="Theme._2048app" parent="Base.Theme._2048app" />
+
+    <style name="PlayButton">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:background">@drawable/bg_item_0</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="fontFamily">@font/oswald_medium</item>
+        <item name="android:textSize">32sp</item>
+
+    </style>
+</resources>
