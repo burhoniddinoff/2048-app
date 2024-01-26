@@ -18,7 +18,13 @@ class AppRepositoryImpl : AppRepository {
         arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0)
     )
 
+    private var score: Int = 0
     private val addElement = 2
+    private val newElementValue: Int
+        get() {
+            // Placeholder logic, you might need to adjust it based on your game's rules
+            return 2 // For example, return 2 as the value for a new element
+        }
 
     init {
         addNewElement()
@@ -26,6 +32,7 @@ class AppRepositoryImpl : AppRepository {
     }
 
     override fun getMatrix(): Array<Array<Int>> = matrix
+    override fun getScore(): Int = score
 
     private fun addNewElement() {
         val empty = ArrayList<Pair<Int, Int>>()
@@ -46,7 +53,6 @@ class AppRepositoryImpl : AppRepository {
     private fun createBasicMatrix() = arrayOf(
         arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0)
     )
-
 
     override fun moveUp() {
         val newMatrix = createBasicMatrix()
@@ -77,6 +83,11 @@ class AppRepositoryImpl : AppRepository {
 
         matrix = newMatrix
         addNewElement()
+
+        if (isScoreUpdated()) {
+            score += newElementValue
+        }
+
         finish()
     }
 
@@ -84,7 +95,6 @@ class AppRepositoryImpl : AppRepository {
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
-
 
         for (i in matrix.indices) {
             index = 3
@@ -109,6 +119,11 @@ class AppRepositoryImpl : AppRepository {
 
         matrix = newMatrix
         addNewElement()
+
+        if (isScoreUpdated()) {
+            score += newElementValue
+        }
+
         finish()
     }
 
@@ -116,7 +131,6 @@ class AppRepositoryImpl : AppRepository {
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
-
 
         for (i in matrix.indices) {
             index = 3
@@ -141,6 +155,11 @@ class AppRepositoryImpl : AppRepository {
 
         matrix = newMatrix
         addNewElement()
+
+        if (isScoreUpdated()) {
+            score += newElementValue
+        }
+
         finish()
     }
 
@@ -148,7 +167,6 @@ class AppRepositoryImpl : AppRepository {
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
-
 
         for (i in matrix.indices) {
             index = 0
@@ -173,7 +191,26 @@ class AppRepositoryImpl : AppRepository {
 
         matrix = newMatrix
         addNewElement()
+
+        if (isScoreUpdated()) {
+            score += newElementValue
+        }
+
         finish()
+    }
+
+    private fun isScoreUpdated(): Boolean {
+        for (i in matrix.indices) {
+            for (j in matrix[i].indices) {
+                if (j < matrix[i].size - 1 && matrix[i][j] == matrix[i][j + 1]) {
+                    return true
+                }
+                if (i < matrix.size - 1 && matrix[i][j] == matrix[i + 1][j]) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     override fun finish(): Boolean {
@@ -183,7 +220,6 @@ class AppRepositoryImpl : AppRepository {
                 if (matrix[i][j] == 0) return false
             }
         }
-
 
         for (i in matrix.indices) {
             for (j in matrix[i].indices) {

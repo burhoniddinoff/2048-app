@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.a2048app.domain.AppRepository
 import com.example.a2048app.domain.AppRepositoryImpl
 
-class GameViewModel() : ViewModel() {
+class GameViewModel : ViewModel() {
     private val repository: AppRepository = AppRepositoryImpl.getInstance()
 
     private val _matrixLiveData = MutableLiveData<Array<Array<Int>>>()
@@ -15,6 +15,8 @@ class GameViewModel() : ViewModel() {
     private val _gameFinishLiveData = MutableLiveData<Boolean>()
     val gameFinishLiveData: LiveData<Boolean> get() = _gameFinishLiveData
 
+    private val _scoreLiveData = MutableLiveData<Int>()
+    val scoreLiveData: LiveData<Int> get() = _scoreLiveData
 
     fun moveUp() {
         repository.moveUp()
@@ -49,8 +51,8 @@ class GameViewModel() : ViewModel() {
         }
     }
 
-
     private fun loadData() {
         _matrixLiveData.value = repository.getMatrix()
+        _scoreLiveData.value = repository.getScore()
     }
 }

@@ -41,11 +41,18 @@ class GameScreen : Fragment(R.layout.screen_game) {
 
         viewModel.gameFinishLiveData.observe(viewLifecycleOwner) { isGameFinished ->
             if (isGameFinished) {
-                // Navigate to the home screen
                 navController.navigate(GameScreenDirections.actionGameScreenToInfoScreen())
             }
         }
 
+        viewModel.scoreLiveData.observe(viewLifecycleOwner) { score ->
+            updateScore(score)
+        }
+
+    }
+
+    private fun updateScore(score: Int) {
+        binding.textScore.text = score.toString()
     }
 
     private fun setupViews() {
@@ -87,6 +94,5 @@ class GameScreen : Fragment(R.layout.screen_game) {
             }
         }
     }
-
 
 }

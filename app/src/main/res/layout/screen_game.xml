@@ -44,18 +44,34 @@
         app:layout_constraintStart_toEndOf="@id/name2048"
         app:layout_constraintTop_toTopOf="@id/name2048">
 
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/text_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/oswald_medium"
             android:gravity="center"
-            android:text="SCORE\n2048"
+            android:text="@string/_2048"
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/oswald_medium"
+        android:gravity="center"
+        android:text="SCORE"
+        android:textColor="#bbada0"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/score"
+        app:layout_constraintEnd_toEndOf="@+id/score"
+        app:layout_constraintStart_toStartOf="@+id/score" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/menu"

@@ -11,4 +11,5 @@
     <string name="when_2">IT\'S OVER WHEN THE BOARD FILLS UP...</string>
     <string name="join">JOIN THE NUMBERS AND GET TO \nTHE 2048 TILE!</string>
     <string name="let_s_play">LET\'S PLAY!</string>
+    <string name="_2048">2048</string>
 </resources>
