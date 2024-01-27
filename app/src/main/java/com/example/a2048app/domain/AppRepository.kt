@@ -8,10 +8,7 @@ interface AppRepository {
     fun moveLeft()
 
     fun getMatrix(): Array<Array<Int>>
-
     fun resetGame()
-
     fun finish(): Boolean
-
     fun getScore(): Int
 }

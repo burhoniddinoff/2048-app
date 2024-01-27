@@ -24,24 +24,36 @@
         tools:layout="@layout/screen_home">
         <action
             android:id="@+id/action_homeScreen_to_gameScreen"
-            app:destination="@id/gameScreen" />
+            app:destination="@id/gameScreen"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_homeScreen_to_infoScreen"
-            app:destination="@id/infoScreen" />
+            app:destination="@id/infoScreen"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 
     <fragment
         android:id="@+id/gameScreen"
         android:name="com.example.a2048app.presenter.ui.game.GameScreen"
         android:label="screen_game"
-        tools:layout="@layout/screen_game" >
+        tools:layout="@layout/screen_game">
         <action
             android:id="@+id/action_gameScreen_to_infoScreen"
-            app:destination="@id/infoScreen" />
+            app:destination="@id/infoScreen"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/infoScreen"
-        tools:layout="@layout/screen_info"
         android:name="com.example.a2048app.presenter.ui.info.InfoScreen"
-        android:label="InfoScreen" />
+        android:label="InfoScreen"
+        tools:layout="@layout/screen_info" />
 </navigation>

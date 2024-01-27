@@ -1,38 +1,73 @@
 package com.example.a2048app.domain
 
-import android.widget.Toast
+import android.content.Context
+import androidx.appcompat.widget.AppCompatTextView
+import com.example.a2048app.utils.MyBackgroundUtil
 import kotlin.random.Random
 
-class AppRepositoryImpl : AppRepository {
+class AppRepositoryImpl(private val context: Context) : AppRepository {
 
     companion object {
+        private const val PREFS_NAME = "2048Prefs"
+        private const val MATRIX_KEY = "matrixKey"
+        private const val SCORE_KEY = "scoreKey"
+        private const val MATRIX_SIZE = 16
+
         private lateinit var instance: AppRepository
 
-        fun getInstance(): AppRepository {
-            if (!(Companion::instance.isInitialized)) instance = AppRepositoryImpl()
+        fun getInstance(context: Context): AppRepository {
+            if (!(Companion::instance.isInitialized)) instance = AppRepositoryImpl(context)
             return instance
         }
+
+        fun getRepository(): AppRepository = instance
     }
 
     private var matrix = arrayOf(
         arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0)
+//        arrayOf(2, 4, 8, 16), arrayOf(32, 64, 128, 256), arrayOf(512, 1024, 2, 4), arrayOf(8, 16, 0, 0)
     )
 
     private var score: Int = 0
     private val addElement = 2
     private val newElementValue: Int
         get() {
-            // Placeholder logic, you might need to adjust it based on your game's rules
-            return 2 // For example, return 2 as the value for a new element
+            return 2
         }
 
+
     init {
-        addNewElement()
         addNewElement()
     }
 
     override fun getMatrix(): Array<Array<Int>> = matrix
     override fun getScore(): Int = score
+
+    private fun saveGameData() {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = prefs.edit()
+
+        val matrixString = matrix.flatten().joinToString(",")
+        editor.putString(MATRIX_KEY, matrixString)
+
+        editor.putInt(SCORE_KEY, score)
+
+        editor.apply()
+    }
+
+    private fun loadGameData() {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
+        val matrixString = prefs.getString(MATRIX_KEY, null)
+        matrix = if (matrixString != null) {
+            val values = matrixString.split(",").map { it.toInt() }
+            Array(4) { i -> Array(4) { j -> values[i * 4 + j] } }
+        } else {
+            createBasicMatrix()
+        }
+
+        score = prefs.getInt(SCORE_KEY, 0)
+    }
 
     private fun addNewElement() {
         val empty = ArrayList<Pair<Int, Int>>()
@@ -53,6 +88,16 @@ class AppRepositoryImpl : AppRepository {
     private fun createBasicMatrix() = arrayOf(
         arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0)
     )
+
+
+    private fun animateTileMovement(tileView: AppCompatTextView, row: Int, col: Int) {
+        val translationX = col * tileView.width.toFloat()
+        val translationY = row * tileView.height.toFloat()
+
+        tileView.animate().translationX(translationX).translationY(translationY)
+            .setDuration(200) // Adjust the duration as needed
+            .start()
+    }
 
     override fun moveUp() {
         val newMatrix = createBasicMatrix()
@@ -79,6 +124,7 @@ class AppRepositoryImpl : AppRepository {
                     isAdded = false
                 }
             }
+
         }
 
         matrix = newMatrix
@@ -86,6 +132,7 @@ class AppRepositoryImpl : AppRepository {
 
         if (isScoreUpdated()) {
             score += newElementValue
+            saveGameData()
         }
 
         finish()
@@ -122,6 +169,7 @@ class AppRepositoryImpl : AppRepository {
 
         if (isScoreUpdated()) {
             score += newElementValue
+            saveGameData()
         }
 
         finish()
@@ -158,6 +206,7 @@ class AppRepositoryImpl : AppRepository {
 
         if (isScoreUpdated()) {
             score += newElementValue
+            saveGameData()
         }
 
         finish()
@@ -194,6 +243,7 @@ class AppRepositoryImpl : AppRepository {
 
         if (isScoreUpdated()) {
             score += newElementValue
+            saveGameData()
         }
 
         finish()
@@ -232,6 +282,7 @@ class AppRepositoryImpl : AppRepository {
     }
 
     override fun resetGame() {
+        score = 0
         matrix = createBasicMatrix()
         addNewElement()
         addNewElement()
