@@ -16,7 +16,10 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         private lateinit var instance: AppRepository
 
         fun getInstance(context: Context): AppRepository {
-            if (!(Companion::instance.isInitialized)) instance = AppRepositoryImpl(context)
+            if (!(Companion::instance.isInitialized)) {
+                instance = AppRepositoryImpl(context)
+                (instance as AppRepositoryImpl).loadGameData()  // Call loadGameData after initializing
+            }
             return instance
         }
 

@@ -38,6 +38,7 @@
         android:fontFamily="@font/oswald_medium"
         android:rotation="90"
         android:text="@string/wall"
+        android:textColor="@color/btn_color"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

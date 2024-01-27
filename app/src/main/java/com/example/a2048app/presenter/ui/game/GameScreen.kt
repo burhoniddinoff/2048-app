@@ -51,6 +51,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
             updateScore(score)
         }
 
+        viewModel.loadData()
+
     }
 
     private fun updateScore(score: Int) {
@@ -97,7 +99,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 }
 
                 textView.setBackgroundResource(MyBackgroundUtil.backgroundByAmount(matrix[i][j]))
-
 //                animateTileMovement(textView, i, j)
             }
         }

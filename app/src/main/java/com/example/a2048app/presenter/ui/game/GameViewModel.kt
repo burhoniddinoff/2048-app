@@ -18,7 +18,7 @@ class GameViewModel : ViewModel() {
     private val _scoreLiveData = MutableLiveData<Int>()
     val scoreLiveData: LiveData<Int> get() = _scoreLiveData
 
-    private fun loadData() {
+    fun loadData() {
         _matrixLiveData.value = repository.getMatrix()
         _scoreLiveData.value = repository.getScore()
     }
