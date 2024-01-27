@@ -36,6 +36,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_homeScreen_to_finishScreen"
+            app:destination="@id/finishScreen" />
     </fragment>
 
     <fragment
@@ -44,16 +47,25 @@
         android:label="screen_game"
         tools:layout="@layout/screen_game">
         <action
-            android:id="@+id/action_gameScreen_to_infoScreen"
-            app:destination="@id/infoScreen"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
+            android:id="@+id/action_gameScreen_to_finishScreen"
+            app:destination="@id/finishScreen"
+            app:popUpTo="@id/homeScreen" />
+
     </fragment>
+
     <fragment
         android:id="@+id/infoScreen"
         android:name="com.example.a2048app.presenter.ui.info.InfoScreen"
         android:label="InfoScreen"
         tools:layout="@layout/screen_info" />
+
+    <fragment
+        android:id="@+id/finishScreen"
+        android:name="com.example.a2048app.presenter.ui.finish.FinishScreen"
+        android:label="FinishScreen"
+        tools:layout="@layout/screen_finish">
+        <argument
+            android:name="score"
+            app:argType="string" />
+    </fragment>
 </navigation>

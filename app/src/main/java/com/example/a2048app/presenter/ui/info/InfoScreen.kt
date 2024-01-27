@@ -22,11 +22,20 @@ class InfoScreen : Fragment(R.layout.screen_info) {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                when (position) {
-                    0 -> binding.btLetsPlay.visibility = View.GONE
-                    1 -> binding.btLetsPlay.visibility = View.GONE
-                    2 -> binding.btLetsPlay.visibility = View.VISIBLE
+                val targetVisibility = when (position) {
+                    0, 1 -> View.GONE
+                    2 -> View.VISIBLE
+                    else -> View.GONE
                 }
+
+                if (binding.btLetsPlay.visibility != targetVisibility) {
+                    val alphaValue = if (targetVisibility == View.VISIBLE) 1f else 0f
+
+                    binding.btLetsPlay.alpha = alphaValue
+                    binding.btLetsPlay.visibility = targetVisibility
+                }
+
+
             }
         })
 

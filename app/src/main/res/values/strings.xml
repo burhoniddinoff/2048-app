@@ -12,4 +12,8 @@
     <string name="join">JOIN THE NUMBERS AND GET TO \nTHE 2048 TILE!</string>
     <string name="let_s_play">LET\'S PLAY!</string>
     <string name="_2048">2048</string>
+    <string name="score">Score</string>
+    <string name="rate">RATE</string>
+    <string name="share">SHARE</string>
+    <string name="try_again">TRY AGAIN</string>
 </resources>

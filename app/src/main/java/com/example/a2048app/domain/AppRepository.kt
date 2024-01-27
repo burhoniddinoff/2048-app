@@ -11,4 +11,5 @@ interface AppRepository {
     fun resetGame()
     fun finish(): Boolean
     fun getScore(): Int
+    fun getBestScore(): Int
 }

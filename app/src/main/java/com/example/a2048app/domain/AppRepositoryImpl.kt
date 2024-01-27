@@ -11,7 +11,8 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         private const val PREFS_NAME = "2048Prefs"
         private const val MATRIX_KEY = "matrixKey"
         private const val SCORE_KEY = "scoreKey"
-        private const val MATRIX_SIZE = 16
+        private const val BEST_SCORE_KEY = "bestScoreKey"
+//        private const val MATRIX_SIZE = 16
 
         private lateinit var instance: AppRepository
 
@@ -32,12 +33,8 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
     )
 
     private var score: Int = 0
+    private var bestScore: Int = 0
     private val addElement = 2
-    private val newElementValue: Int
-        get() {
-            return 2
-        }
-
 
     init {
         addNewElement()
@@ -45,6 +42,13 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
 
     override fun getMatrix(): Array<Array<Int>> = matrix
     override fun getScore(): Int = score
+    override fun getBestScore(): Int {
+
+        if (score >= bestScore) bestScore = score
+
+        return bestScore
+
+    }
 
     private fun saveGameData() {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -54,6 +58,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         editor.putString(MATRIX_KEY, matrixString)
 
         editor.putInt(SCORE_KEY, score)
+        editor.putInt(BEST_SCORE_KEY, bestScore)
 
         editor.apply()
     }
@@ -70,6 +75,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         }
 
         score = prefs.getInt(SCORE_KEY, 0)
+        bestScore = prefs.getInt(BEST_SCORE_KEY, 0)
     }
 
     private fun addNewElement() {
@@ -121,6 +127,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
 
                 if (newMatrix[index][i] == matrix[j][i] && !isAdded) {
                     newMatrix[index][i] *= 2
+                    score += newMatrix[index][i]
                     isAdded = true
                 } else {
                     newMatrix[++index][i] = matrix[j][i]
@@ -134,7 +141,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         addNewElement()
 
         if (isScoreUpdated()) {
-            score += newElementValue
+//            score += newElementValue
             saveGameData()
         }
 
@@ -159,6 +166,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
 
                 if (newMatrix[i][index] == matrix[i][j] && !isAdded) {
                     newMatrix[i][index] *= 2
+                    score += newMatrix[i][index]
                     isAdded = true
                 } else {
                     newMatrix[i][--index] = matrix[i][j]
@@ -171,7 +179,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         addNewElement()
 
         if (isScoreUpdated()) {
-            score += newElementValue
+//            score += newElementValue
             saveGameData()
         }
 
@@ -196,6 +204,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
 
                 if (newMatrix[index][i] == matrix[j][i] && !isAdded) {
                     newMatrix[index][i] *= 2
+                    score += newMatrix[index][i]
                     isAdded = true
                 } else {
                     newMatrix[--index][i] = matrix[j][i]
@@ -208,7 +217,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         addNewElement()
 
         if (isScoreUpdated()) {
-            score += newElementValue
+//            score += newElementValue
             saveGameData()
         }
 
@@ -233,6 +242,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
 
                 if (newMatrix[i][index] == matrix[i][j] && !isAdded) {
                     newMatrix[i][index] *= 2
+                    score += newMatrix[i][index]
                     isAdded = true
                 } else {
                     newMatrix[i][++index] = matrix[i][j]
@@ -245,7 +255,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         addNewElement()
 
         if (isScoreUpdated()) {
-            score += newElementValue
+//            score += newElementValue
             saveGameData()
         }
 

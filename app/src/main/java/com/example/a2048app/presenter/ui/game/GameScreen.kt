@@ -1,6 +1,7 @@
 package com.example.a2048app.presenter.ui.game
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -40,23 +41,24 @@ class GameScreen : Fragment(R.layout.screen_game) {
             viewModel.restartGame()
         }
 
-        viewModel.gameFinishLiveData.observe(viewLifecycleOwner) { isGameFinished ->
-            if (isGameFinished) {
-                Toast.makeText(requireContext(), "finish", Toast.LENGTH_SHORT).show()
-                navController.navigate(GameScreenDirections.actionGameScreenToInfoScreen())
-            }
-        }
-
         viewModel.scoreLiveData.observe(viewLifecycleOwner) { score ->
             updateScore(score)
         }
 
-        viewModel.loadData()
+        viewModel.bestScoreLiveData.observe(viewLifecycleOwner) { score ->
+            updateBestScore(score)
+        }
 
+        viewModel.loadData()
     }
+
 
     private fun updateScore(score: Int) {
         binding.textScore.text = score.toString()
+    }
+
+    private fun updateBestScore(score: Int) {
+        binding.textBest.text = score.toString()
     }
 
     private fun setupViews() {
@@ -73,13 +75,33 @@ class GameScreen : Fragment(R.layout.screen_game) {
         val myTouchListener = MyTouchListener(requireContext())
         myTouchListener.setActionSideEnumListener {
             when (it) {
-                SideEnum.UP -> viewModel.moveUp()
-                SideEnum.RIGHT -> viewModel.moveRight()
-                SideEnum.DOWN -> viewModel.moveDown()
-                SideEnum.LEFT -> viewModel.moveLeft()
+                SideEnum.UP -> {
+                    if (viewModel.finish()) openFinishScreen()
+                    else viewModel.moveUp()
+                }
+
+                SideEnum.RIGHT -> {
+                    if (viewModel.finish()) openFinishScreen()
+                    else viewModel.moveRight()
+                }
+
+                SideEnum.DOWN -> {
+                    if (viewModel.finish()) openFinishScreen()
+                    else viewModel.moveDown()
+                }
+
+                SideEnum.LEFT -> {
+                    if (viewModel.finish()) openFinishScreen()
+                    else viewModel.moveLeft()
+                }
             }
         }
-        binding.mainView.setOnTouchListener(myTouchListener)
+        binding.root.setOnTouchListener(myTouchListener)
+    }
+
+    private fun openFinishScreen() {
+        navController.navigate(GameScreenDirections.actionGameScreenToFinishScreen(viewModel.scoreLiveData.value.toString()))
+        viewModel.restartGame()
     }
 
     private fun setupObservers() {
@@ -92,11 +114,9 @@ class GameScreen : Fragment(R.layout.screen_game) {
         for (i in matrix.indices) {
             for (j in matrix[i].indices) {
                 val textView = views[i * 4 + j]
-                if (matrix[i][j] == 0) {
-                    textView.text = ""
-                } else {
-                    textView.text = "${matrix[i][j]}"
-                }
+                if (matrix[i][j] == 0) textView.text = ""
+                else textView.text = "${matrix[i][j]}"
+
 
                 textView.setBackgroundResource(MyBackgroundUtil.backgroundByAmount(matrix[i][j]))
 //                animateTileMovement(textView, i, j)

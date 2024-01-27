@@ -44,34 +44,45 @@
         app:layout_constraintStart_toEndOf="@id/name2048"
         app:layout_constraintTop_toTopOf="@id/name2048">
 
-
-        <TextView
-            android:id="@+id/text_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/oswald_medium"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="@string/_2048"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_medium"
+                android:gravity="center"
+                android:text="SCORE"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/score"
+                app:layout_constraintEnd_toEndOf="@+id/score"
+                app:layout_constraintStart_toStartOf="@+id/score"
+                app:layout_constraintTop_toTopOf="@+id/score"
+                app:layout_constraintVertical_bias="0.18" />
+
+            <TextView
+                android:id="@+id/text_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_medium"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/oswald_medium"
-        android:gravity="center"
-        android:text="SCORE"
-        android:textColor="#bbada0"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/score"
-        app:layout_constraintEnd_toEndOf="@+id/score"
-        app:layout_constraintStart_toStartOf="@+id/score" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/menu"
@@ -108,17 +119,53 @@
         app:layout_constraintStart_toEndOf="@id/score"
         app:layout_constraintTop_toTopOf="@id/score">
 
-        <TextView
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:fontFamily="@font/oswald_medium"-->
+<!--            android:gravity="center"-->
+<!--            android:text="BEST\n2048"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="20sp"-->
+<!--            android:textStyle="bold"-->
+<!--            tools:ignore="HardcodedText" />-->
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:fontFamily="@font/oswald_medium"
+            android:orientation="vertical"
             android:gravity="center"
-            android:text="BEST\n2048"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText" />
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_medium"
+                android:gravity="center"
+                android:text="BEST"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/score"
+                app:layout_constraintEnd_toEndOf="@+id/score"
+                app:layout_constraintStart_toStartOf="@+id/score"
+                app:layout_constraintTop_toTopOf="@+id/score"
+                app:layout_constraintVertical_bias="0.18" />
+
+            <TextView
+                android:id="@+id/text_best"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/oswald_medium"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -165,7 +212,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="20dp"
-        android:background="#bbada0"
+        android:background="@drawable/bg_radius"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"

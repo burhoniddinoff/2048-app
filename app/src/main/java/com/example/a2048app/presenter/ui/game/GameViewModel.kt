@@ -12,15 +12,17 @@ class GameViewModel : ViewModel() {
     private val _matrixLiveData = MutableLiveData<Array<Array<Int>>>()
     val matrixLiveData: LiveData<Array<Array<Int>>> get() = _matrixLiveData
 
-    private val _gameFinishLiveData = MutableLiveData<Boolean>()
-    val gameFinishLiveData: LiveData<Boolean> get() = _gameFinishLiveData
 
     private val _scoreLiveData = MutableLiveData<Int>()
     val scoreLiveData: LiveData<Int> get() = _scoreLiveData
 
+    private val _bestScoreLiveData = MutableLiveData<Int>()
+    val bestScoreLiveData: LiveData<Int> get() = _bestScoreLiveData
+
     fun loadData() {
         _matrixLiveData.value = repository.getMatrix()
         _scoreLiveData.value = repository.getScore()
+        _bestScoreLiveData.value = repository.getBestScore()
     }
 
     fun moveUp() {
@@ -48,12 +50,8 @@ class GameViewModel : ViewModel() {
         loadData()
     }
 
-    private fun finish() {
-        val isGameFinished = repository.finish()
-
-        if (isGameFinished) {
-            _gameFinishLiveData.value = true
-        }
+    fun finish(): Boolean {
+        return repository.finish()
     }
 
 }

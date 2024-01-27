@@ -1,5 +1,8 @@
 package com.example.a2048app.presenter.ui.home
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -19,6 +22,7 @@ class HomeScreen : Fragment(R.layout.screen_home) {
         openNewGame()
         openResumeGame()
         openInfo()
+        openRate()
     }
 
     private fun openNewGame() {
@@ -34,10 +38,19 @@ class HomeScreen : Fragment(R.layout.screen_home) {
         }
     }
 
-
     private fun openInfo() {
         binding.btnHowToPlay.setOnClickListener {
             navController.navigate(HomeScreenDirections.actionHomeScreenToInfoScreen())
+        }
+    }
+
+    private fun openRate() {
+        binding.btnRate.setOnClickListener {
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${requireContext().packageName}")))
+            } catch (e: ActivityNotFoundException) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${requireContext().packageName}")))
+            }
         }
     }
 
