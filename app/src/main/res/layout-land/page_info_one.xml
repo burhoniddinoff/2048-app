@@ -9,28 +9,43 @@
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
-        android:layout_height="512dp"
-        android:src="@drawable/ic_info_3"
+        android:layout_height="400dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/ic_info_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/oswald_medium"
-        android:gravity="center"
-        android:text="@string/join"
+        android:text="@string/swipe"
         android:textColor="#f2b433"
-        android:textSize="20sp"
+        android:textSize="23sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.17000002" />
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/oswald_medium"
+        android:rotation="270"
+        android:text="@string/wall"
+        android:textColor="@color/btn_color"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

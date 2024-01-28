@@ -6,7 +6,7 @@ import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
-import com.example.a2048app.data.enum1.SideEnum
+import com.example.a2048app.data.SideEnum
 import kotlin.math.abs
 
 class MyTouchListener(private val context: Context) : View.OnTouchListener {

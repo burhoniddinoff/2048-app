@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.a2048app.R
-import com.example.a2048app.data.enum1.SideEnum
+import com.example.a2048app.data.SideEnum
 import com.example.a2048app.databinding.ScreenGameBinding
 import com.example.a2048app.utils.MyBackgroundUtil
 import com.example.a2048app.utils.MyTouchListener
@@ -114,7 +114,6 @@ class GameScreen : Fragment(R.layout.screen_game) {
                 val textView = views[i * 4 + j]
                 if (matrix[i][j] == 0) textView.text = ""
                 else textView.text = "${matrix[i][j]}"
-
 
                 textView.setBackgroundResource(MyBackgroundUtil.backgroundByAmount(matrix[i][j]))
 //                animateTileMovement(textView, i, j)

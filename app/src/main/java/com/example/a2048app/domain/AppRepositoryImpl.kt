@@ -47,7 +47,6 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         if (score >= bestScore) bestScore = score
 
         return bestScore
-
     }
 
     private fun saveGameData() {
@@ -98,7 +97,6 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0)
     )
 
-
     private fun animateTileMovement(tileView: AppCompatTextView, row: Int, col: Int) {
         val translationX = col * tileView.width.toFloat()
         val translationY = row * tileView.height.toFloat()
@@ -134,7 +132,6 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
                     isAdded = false
                 }
             }
-
         }
 
         matrix = newMatrix
