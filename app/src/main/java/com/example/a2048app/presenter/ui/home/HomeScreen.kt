@@ -7,22 +7,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.a2048app.R
 import com.example.a2048app.databinding.ScreenHomeBinding
 import com.example.a2048app.presenter.ui.game.GameViewModel
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.launch
-import java.time.Duration
 
-@OptIn(FlowPreview::class)
 class HomeScreen : Fragment(R.layout.screen_home) {
     private val binding by viewBinding(ScreenHomeBinding::bind)
-    private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
     private val viewModel: GameViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,25 +23,25 @@ class HomeScreen : Fragment(R.layout.screen_home) {
         openInfo()
         openRate()
 
-        handleNavigations()
+//        handleNavigations()
     }
 
     private fun openNewGame() {
         binding.btnNewGame.setOnClickListener {
             viewModel.restartGame()
-            viewModel.openScreen(HomeScreenDirections.actionHomeScreenToGameScreen())
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToGameScreen())
         }
     }
 
     private fun openResumeGame() {
         binding.btnKeepGoing.setOnClickListener {
-            viewModel.openScreen(HomeScreenDirections.actionHomeScreenToGameScreen())
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToGameScreen())
         }
     }
 
     private fun openInfo() {
         binding.btnHowToPlay.setOnClickListener {
-            viewModel.openScreen(HomeScreenDirections.actionHomeScreenToInfoScreen())
+            findNavController().navigate(HomeScreenDirections.actionHomeScreenToInfoScreen())
         }
     }
 
@@ -73,14 +65,14 @@ class HomeScreen : Fragment(R.layout.screen_home) {
         }
     }
 
-    private fun handleNavigations() {
-        lifecycleScope.launch {
-            viewModel
-                .navigation
-                .debounce(200)
-                .collect {
-                    navController.navigate(it)
-                }
-        }
-    }
+//    @SuppressLint("RestrictedApi")
+//    private fun handleNavigations() {
+//        lifecycleScope.launch {
+//            viewModel.navigation.debounce(200).collect {
+////                Log.d("TTT", "${findNavController().currentBackStack.value.last().destination.label}")
+//                    delay(200)
+//                    findNavController().navigate(it)
+//                }
+//        }
+//    }
 }

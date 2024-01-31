@@ -36,9 +36,6 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
-        <action
-            android:id="@+id/action_homeScreen_to_finishScreen"
-            app:destination="@id/finishScreen" />
     </fragment>
 
     <fragment
@@ -46,9 +43,14 @@
         android:name="com.example.a2048app.presenter.ui.game.GameScreen"
         android:label="screen_game"
         tools:layout="@layout/screen_game">
+
         <action
             android:id="@+id/action_gameScreen_to_finishScreen"
             app:destination="@id/finishScreen"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/homeScreen" />
 
     </fragment>

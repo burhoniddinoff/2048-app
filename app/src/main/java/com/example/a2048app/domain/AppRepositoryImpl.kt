@@ -2,7 +2,7 @@ package com.example.a2048app.domain
 
 import android.content.Context
 import androidx.appcompat.widget.AppCompatTextView
-import com.example.a2048app.utils.MyBackgroundUtil
+import com.example.a2048app.utils.deepCopyCopyMatrix
 import kotlin.random.Random
 
 class AppRepositoryImpl(private val context: Context) : AppRepository {
@@ -12,14 +12,13 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         private const val MATRIX_KEY = "matrixKey"
         private const val SCORE_KEY = "scoreKey"
         private const val BEST_SCORE_KEY = "bestScoreKey"
-//        private const val MATRIX_SIZE = 16
 
         private lateinit var instance: AppRepository
 
         fun getInstance(context: Context): AppRepository {
             if (!(Companion::instance.isInitialized)) {
                 instance = AppRepositoryImpl(context)
-                (instance as AppRepositoryImpl).loadGameData()  // Call loadGameData after initializing
+                (instance as AppRepositoryImpl).loadGameData()
             }
             return instance
         }
@@ -35,6 +34,8 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
     private var score: Int = 0
     private var bestScore: Int = 0
     private val addElement = 2
+    private var lastStepMatrix: Array<Array<Int>> = matrix.deepCopyCopyMatrix()
+    private var lastStepScore = 0
 
     init {
         addNewElement()
@@ -43,9 +44,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
     override fun getMatrix(): Array<Array<Int>> = matrix
     override fun getScore(): Int = score
     override fun getBestScore(): Int {
-
         if (score >= bestScore) bestScore = score
-
         return bestScore
     }
 
@@ -69,21 +68,18 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         matrix = if (matrixString != null) {
             val values = matrixString.split(",").map { it.toInt() }
             Array(4) { i -> Array(4) { j -> values[i * 4 + j] } }
-        } else {
-            createBasicMatrix()
-        }
+        } else createBasicMatrix()
 
         score = prefs.getInt(SCORE_KEY, 0)
         bestScore = prefs.getInt(BEST_SCORE_KEY, 0)
+        lastStepMatrix = matrix.deepCopyCopyMatrix()
     }
 
     private fun addNewElement() {
         val empty = ArrayList<Pair<Int, Int>>()
 
         for (i in matrix.indices) {
-            for (j in matrix[i].indices) {
-                if (matrix[i][j] == 0) empty.add(Pair(i, j))
-            }
+            for (j in matrix[i].indices) if (matrix[i][j] == 0) empty.add(Pair(i, j))
         }
 
         if (empty.isEmpty()) return
@@ -107,10 +103,13 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
     }
 
     override fun moveUp() {
+        lastStepMatrix = matrix.deepCopyCopyMatrix()
+        lastStepScore = score
+
+
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
-
 
         for (i in matrix.indices) {
             index = 0
@@ -137,15 +136,15 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         matrix = newMatrix
         addNewElement()
 
-        if (isScoreUpdated()) {
-//            score += newElementValue
-            saveGameData()
-        }
+        if (isScoreUpdated()) saveGameData()
 
         finish()
     }
 
     override fun moveRight() {
+        lastStepMatrix = matrix.deepCopyCopyMatrix()
+        lastStepScore = score
+
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
@@ -175,15 +174,15 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         matrix = newMatrix
         addNewElement()
 
-        if (isScoreUpdated()) {
-//            score += newElementValue
-            saveGameData()
-        }
+        if (isScoreUpdated()) saveGameData()
 
         finish()
     }
 
     override fun moveDown() {
+        lastStepMatrix = matrix.deepCopyCopyMatrix()
+        lastStepScore = score
+
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
@@ -213,15 +212,15 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         matrix = newMatrix
         addNewElement()
 
-        if (isScoreUpdated()) {
-//            score += newElementValue
-            saveGameData()
-        }
+        if (isScoreUpdated()) saveGameData()
 
         finish()
     }
 
     override fun moveLeft() {
+        lastStepMatrix = matrix.deepCopyCopyMatrix()
+        lastStepScore = score
+
         val newMatrix = createBasicMatrix()
         var index: Int
         var isAdded: Boolean
@@ -251,10 +250,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         matrix = newMatrix
         addNewElement()
 
-        if (isScoreUpdated()) {
-//            score += newElementValue
-            saveGameData()
-        }
+        if (isScoreUpdated()) saveGameData()
 
         finish()
     }
@@ -262,23 +258,17 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
     private fun isScoreUpdated(): Boolean {
         for (i in matrix.indices) {
             for (j in matrix[i].indices) {
-                if (j < matrix[i].size - 1 && matrix[i][j] == matrix[i][j + 1]) {
-                    return true
-                }
-                if (i < matrix.size - 1 && matrix[i][j] == matrix[i + 1][j]) {
-                    return true
-                }
+                if (j < matrix[i].size - 1 && matrix[i][j] == matrix[i][j + 1]) return true
+                if (i < matrix.size - 1 && matrix[i][j] == matrix[i + 1][j]) return true
             }
         }
+
         return false
     }
 
     override fun finish(): Boolean {
-
         for (i in matrix.indices) {
-            for (j in matrix[i].indices) {
-                if (matrix[i][j] == 0) return false
-            }
+            for (j in matrix[i].indices) if (matrix[i][j] == 0) return false
         }
 
         for (i in matrix.indices) {
@@ -298,4 +288,8 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
         addNewElement()
     }
 
+    override fun getLastStepMatrix() {
+        matrix = lastStepMatrix.deepCopyCopyMatrix()
+        score = lastStepScore
+    }
 }

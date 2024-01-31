@@ -12,4 +12,5 @@ interface AppRepository {
     fun finish(): Boolean
     fun getScore(): Int
     fun getBestScore(): Int
+    fun getLastStepMatrix()
 }

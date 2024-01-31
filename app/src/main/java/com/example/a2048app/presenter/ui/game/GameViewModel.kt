@@ -18,20 +18,22 @@ class GameViewModel : ViewModel() {
     private val _matrixLiveData = MutableLiveData<Array<Array<Int>>>()
     val matrixLiveData: LiveData<Array<Array<Int>>> get() = _matrixLiveData
 
-
     private val _scoreLiveData = MutableLiveData<Int>()
     val scoreLiveData: LiveData<Int> get() = _scoreLiveData
 
     private val _bestScoreLiveData = MutableLiveData<Int>()
     val bestScoreLiveData: LiveData<Int> get() = _bestScoreLiveData
 
-    private val _navigation = MutableSharedFlow<NavDirections>()
-    val navigation = _navigation.asSharedFlow()
+
+
+//    private val _navigation = MutableSharedFlow<NavDirections>()
+//    val navigation = _navigation.asSharedFlow()
 
     fun loadData() {
         _matrixLiveData.value = repository.getMatrix()
         _scoreLiveData.value = repository.getScore()
         _bestScoreLiveData.value = repository.getBestScore()
+//        _lastMatrixStepMatrix.value = repository.getLastStepMatrix()
     }
 
     fun moveUp() {
@@ -59,14 +61,19 @@ class GameViewModel : ViewModel() {
         loadData()
     }
 
+    fun getLastStep() {
+        repository.getLastStepMatrix()
+        loadData()
+    }
+
     fun finish(): Boolean {
         return repository.finish()
     }
 
     fun openScreen(navDirections: NavDirections) {
-        viewModelScope.launch {
-            _navigation.emit(navDirections)
-        }
+//        viewModelScope.launch {
+//            _navigation.emit(navDirections)
+//        }
     }
 
 }
