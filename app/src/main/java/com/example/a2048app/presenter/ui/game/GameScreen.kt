@@ -32,8 +32,8 @@ class GameScreen : Fragment(R.layout.screen_game) {
         setupObservers()
 
         binding.menu.setOnClickListener {
-            viewModel.getLastStep()
-            //navController.popBackStack()
+//            viewModel.getLastStep()
+            navController.popBackStack()
         }
 
         binding.restart.setOnClickListener {

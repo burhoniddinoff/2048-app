@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintVertical_bias="0.77" />
 
     <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
@@ -44,7 +44,7 @@
         app:dotsStrokeColor="#9C9C9C"
         app:dotsStrokeWidth="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/bt_lets_play"
+        app:layout_constraintStart_toStartOf="@id/bt_lets_play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

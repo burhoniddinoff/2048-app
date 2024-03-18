@@ -23,6 +23,7 @@ class HomeScreen : Fragment(R.layout.screen_home) {
         openInfo()
         openRate()
 
+
 //        handleNavigations()
     }
 

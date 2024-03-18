@@ -91,6 +91,7 @@ class AppRepositoryImpl(private val context: Context) : AppRepository {
 
     private fun createBasicMatrix() = arrayOf(
         arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0), arrayOf(0, 0, 0, 0)
+//        arrayOf(2, 4, 8, 16), arrayOf(32, 64, 128, 256), arrayOf(512, 1024, 2, 4), arrayOf(8, 16, 123, 1230)
     )
 
     private fun animateTileMovement(tileView: AppCompatTextView, row: Int, col: Int) {

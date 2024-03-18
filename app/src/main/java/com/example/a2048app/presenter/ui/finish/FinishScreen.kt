@@ -30,7 +30,7 @@ class FinishScreen : Fragment(R.layout.screen_finish) {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://t.me/")
+                    Uri.parse("https://t.me/brxnw")
                 )
             )
         }
